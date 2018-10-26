@@ -1,0 +1,30 @@
+{
+  "name": "sb-color-picker",
+  "version": "0.1.0",
+  "description": "A Vue color picker component based on the Farbtastic jQuery Color Picker plug-in",
+  "main": "dist/color-picker.umd.js",
+  "module": "dist/color-picker.esm.js",
+  "unpkg": "dist/color-picker.min.js",
+  "browser": {
+    "./sfc": "src/color-picker.vue"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run build:umd & npm run build:es & npm run build:unpkg",
+    "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/color-picker.umd.js",
+    "build:es": "rollup --config build/rollup.config.js --format es --file dist/color-picker.esm.js",
+    "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/color-picker.min.js"
+  },
+  "author": "Jeroen Peerbolte <jeroen@stijlbreuk.nl>",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.3.1"
+  },
+  "devDependencies": {
+    "rollup": "^0.66.6",
+    "rollup-plugin-buble": "^0.19.4",
+    "rollup-plugin-vue": "^4.3.2",
+    "vue": "^2.5.17",
+    "vue-template-compiler": "^2.5.17"
+  }
+}
