@@ -49,6 +49,11 @@ In a script tag, this loads the component using the global Vue instance.
 | disabled   | Whether or not the color picker should be disabled      | Boolean                 | false   | :disabled="false"    |
 | startColor | The color that is selected when opening the colorpicker | String (hex color code) | none    | startColor="#ffffff" |
 
+# Events
+| Event       | Description                                   | Event parameters               |
+| ----------- | --------------------------------------------- | ------------------------------ |
+| colorChange | Is fired after the selected color has changed | color: String (hex color code) |
+
 # Contributing
 
 ```bash
