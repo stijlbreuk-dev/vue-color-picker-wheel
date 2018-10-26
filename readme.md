@@ -42,12 +42,12 @@ In a script tag, this loads the component using the global Vue instance.
 ```
 
 # Props
-| Property | Description | Type | Default | Example |
-| --- | --- | --- | --- | --- |
-| width | The width of the color picker | Number | 300 | :width="400" |
-| height | The height of the color picker | Number | 300 | :height="400" |
-| disabled | Whether or not the color picker should be disabled | Boolean | false | :disabled="false" |
-| startColor | The color that is selected when opening the colorpicker | String (hex color code) | none | startColor="#ffffff" |
+| Property   | Description                                             | Type                    | Default | Example              |
+| ---------- | ------------------------------------------------------- | ----------------------- | ------- | -------------------- |
+| width      | The width of the color picker                           | Number                  | 300     | :width="400"         |
+| height     | The height of the color picker                          | Number                  | 300     | :height="400"        |
+| disabled   | Whether or not the color picker should be disabled      | Boolean                 | false   | :disabled="false"    |
+| startColor | The color that is selected when opening the colorpicker | String (hex color code) | none    | startColor="#ffffff" |
 
 # Contributing
 
