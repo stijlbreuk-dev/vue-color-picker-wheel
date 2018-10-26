@@ -1,6 +1,6 @@
 {
   "name": "sb-color-picker",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A Vue color picker component based on the Farbtastic jQuery Color Picker plug-in",
   "main": "dist/color-picker.umd.js",
   "module": "dist/color-picker.esm.js",
@@ -17,8 +17,8 @@
   },
   "author": "Jeroen Peerbolte <jeroen@stijlbreuk.nl>",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/stijlbreuk/color-picker.git"
+    "type": "git",
+    "url": "https://github.com/stijlbreuk/color-picker.git"
   },
   "license": "ISC",
   "dependencies": {
