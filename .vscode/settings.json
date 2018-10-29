@@ -1,0 +1,6 @@
+{
+  "vetur.validation.template": false,
+  "vetur.format.defaultFormatter.js": "vscode-typescript",
+  "vetur.format.defaultFormatter.scss": "none",
+  "editor.tabSize": 4
+}
