@@ -14,7 +14,7 @@ ES6 modules
 ```HTML
 <template>
   <div>
-    <ColorPicker :width="300" :height="300" :disabled="false"></ColorPicker>
+    <ColorPicker :width="300" :height="300" :disabled="false" @colorChange="onColorChange"></ColorPicker>
   </div>
 </template>
 
@@ -25,6 +25,11 @@ export default {
   name: 'app',
   components: {
     ColorPicker
+  },
+  methods: {
+    onColorChange(color) {
+      console.log('Color has changed to: ', color);
+    }
   }
 };
 </script>

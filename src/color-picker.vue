@@ -1,56 +1,79 @@
 <template>
-    <div>
+    <div ref="container">
         <!-- <input id="color-input" type="text" v-model="color"></input> -->
-        <div>
-            <div :class="{s_disabled: disabled}" ref="color-wheel" id="color-wheel" style="position: relative">
-                <div class="farbtastic" style="position: relative" :style="{width, height}" :width="width" :height="height">
-                    <div ref="farbtastic-solid" class="farbtastic-solid" :style="solidStyle" :width="width" :height="height" style="position: absolute"></div>
-                    <canvas ref="farbtastic-mask" class="farbtastic-mask" :style="{width, height}" :width="width" :height="height" style="position: absolute"></canvas>
-                    <canvas @mousedown="mousedown" @touchstart="touchHandleStart" @touchmove="touchHandleMove" @touchend="touchHandleEnd" ref="farbtastic-overlay" class="farbtastic-overlay" :style="{width, height}" :width="width" :height="height" style="position: absolute"></canvas>
-                </div>
+        <div :class="{s_disabled: disabled}"
+             ref="color-wheel"
+             id="color-wheel"
+             style="position: relative">
+            <div class="farbtastic"
+                 style="position: relative"
+                 :style="{width, height}"
+                 :width="width"
+                 :height="height">
+                <div ref="farbtastic-solid"
+                     class="farbtastic-solid"
+                     :style="solidStyle"
+                     :width="width"
+                     :height="height"
+                     style="position: absolute"></div>
+                <canvas ref="farbtastic-mask"
+                        class="farbtastic-mask"
+                        :style="{width, height}"
+                        :width="width"
+                        :height="height"
+                        style="position: absolute"></canvas>
+                <canvas @mousedown="mousedown"
+                        @touchstart="touchHandleStart"
+                        @touchmove="touchHandleMove"
+                        @touchend="touchHandleEnd"
+                        ref="farbtastic-overlay"
+                        class="farbtastic-overlay"
+                        :style="{width, height}"
+                        :width="width"
+                        :height="height"
+                        style="position: absolute"></canvas>
             </div>
         </div>
     </div>
 </template>
 <script>
-import $ from 'jquery';
+import isIE from './util/is-ie.js';
 
 const DEFAULT_WIDTH_HEIGHT = 300;
 
 export default {
+    name: 'color-picker',
     props: {
-      width: {
-        required: false,
-        type: Number,
-        default: DEFAULT_WIDTH_HEIGHT
-      },
-      height: {
-        required: false,
-        type: Number,
-        default: DEFAULT_WIDTH_HEIGHT
-      },
-      disabled: {
-        required: false,
-        type: Boolean,
-        default: false
-      },
-      startColor: {
-        required: false,
-        type: String
-      }
+        width: {
+            required: false,
+            type: Number,
+            default: DEFAULT_WIDTH_HEIGHT
+        },
+        height: {
+            required: false,
+            type: Number,
+            default: DEFAULT_WIDTH_HEIGHT
+        },
+        disabled: {
+            required: false,
+            type: Boolean,
+            default: false
+        },
+        startColor: {
+            required: false,
+            type: String
+        }
     },
     mounted() {
         this.initWidget();
         if (this.startColor) {
             this.setColor(this.startColor);
         }
-        $.extend($.support, {
-            touch: 'ontouchend' in document,
-        });
         if (!this.color) this.setColor('#808080');
     },
     data() {
         return {
+            debug: true,
             dragging: false,
             circleDrag: false,
             value: '',
@@ -67,23 +90,23 @@ export default {
             cnvOverlay: '',
             offset: {
                 left: '',
-                top: '',
-            },
+                top: ''
+            }
         };
     },
     computed: {
         solidStyle() {
             return {
                 'background-color': this.pack(this.HSLToRGB([this.hsl[0], 1, 0.5])),
-                width: `${(this.square * 2) - 1}px`,
-                height: `${(this.square * 2) - 1}px`,
+                width: `${this.square * 2 - 1}px`,
+                height: `${this.square * 2 - 1}px`,
                 left: `${this.mid - this.square}px`,
-                top: `${this.mid - this.square}px`,
+                top: `${this.mid - this.square}px`
             };
         },
         wheelWidth() {
             return (this.width || 300) / 10;
-        },
+        }
     },
     methods: {
         updateValue() {
@@ -109,52 +132,9 @@ export default {
             return this;
         },
         initWidget() {
-            // Insert markup and size accordingly.
-            // const dim = {
-            //     width: width,
-            //     height: width,
-            // };
-            // $(container)
-            //     .html(
-            //     '<div class="farbtastic" style="position: relative">' +
-            //     '<div class="farbtastic-solid"></div>' +
-            //     '<canvas class="farbtastic-mask"></canvas>' +
-            //     '<canvas class="farbtastic-overlay"></canvas>' +
-            //     '</div>',
-            // )
-            //     .find('*')
-            //     .attr(dim)
-            //     .css(dim)
-            //     .end()
-            //     .find('div>*')
-            //     .css('position', 'absolute');
-
-            // IE Fix: Recreate canvas elements with doc.createElement and excanvas.
-            // if ($.browser.msie) {
-            //     $('canvas', container).each(() => {
-            //         // Fetch info.
-            //         const attr = { class: $(this).attr('class'),
-            //          style: this.getAttribute('style') };
-            //         const e = document.createElement('canvas');
-            //         // Replace element.
-            //         $(this).before($(e).attr(attr)).remove();
-            //         // Init with explorerCanvas.
-            //         if (window.G_vmlCanvasManager) {
-            //             window.G_vmlCanvasManager.initElement(e);
-            //         }
-            //         // Set explorerCanvas elements dimensions and absolute positioning.
-            //         $(e).attr(dim)
-            //             .css(dim)
-            //             .css('position', 'absolute')
-            //             .find('*')
-            //             .attr(dim)
-            //             .css(dim);
-            //     });
-            // }
-
             // Determine layout
-            this.radius = ((this.width - this.wheelWidth) / 2) - 1;
-            this.square = Math.floor((this.radius - (this.wheelWidth / 2)) * 0.7) - 1;
+            this.radius = (this.width - this.wheelWidth) / 2 - 1;
+            this.square = Math.floor((this.radius - this.wheelWidth / 2) * 0.7) - 1;
             this.mid = Math.floor(this.width / 2);
             this.markerSize = this.wheelWidth * 0.3;
 
@@ -175,11 +155,13 @@ export default {
         },
         upscaleCanvas(cnv) {
             const ctx = cnv.getContext('2d');
-            const backingStoreRatio = ctx.webkitBackingStorePixelRatio ||
+            const backingStoreRatio =
+                ctx.webkitBackingStorePixelRatio ||
                 ctx.mozBackingStorePixelRatio ||
                 ctx.msBackingStorePixelRatio ||
                 ctx.oBackingStorePixelRatio ||
-                ctx.backingStorePixelRatio || 1;
+                ctx.backingStorePixelRatio ||
+                1;
             if (this.devicePixelRatio !== backingStoreRatio) {
                 const ratio = this.devicePixelRatio / backingStoreRatio;
 
@@ -192,8 +174,8 @@ export default {
                 ctx.scale(ratio, ratio);
             }
         },
-        drawCircle() {
-            // const tm = +(new Date());
+        drawCircle() {            ``
+            const tm = +(new Date());
             // Draw a hue circle with a bunch of gradient-stroked beziers.
             // Have to use beziers, as gradient-stroked arcs don't work.
             const n = 24;
@@ -203,7 +185,7 @@ export default {
             const m = this.ctxMask;
             let angle1 = 0;
             let angle2;
-            // let d1;
+            let d1;
             let color1;
             let color2;
             m.save();
@@ -227,29 +209,6 @@ export default {
                 // New color
                 color2 = this.pack(this.HSLToRGB([d2, 1, 0.5]));
                 if (i > 0) {
-                    // if ($.browser.msie || false) {
-                    //     // IE's gradient calculations mess up the colors.
-                    //     // Correct along the diagonals.
-                    //     const corr = (1 + Math.min(Math.abs(Math.tan(angle1)),
-                    //         Math.abs(Math.tan((Math.PI / 2) - angle1)))) / n;
-                    //     color1 = this.pack(this.HSLToRGB([d1 - (0.15 * corr), 1, 0.5]));
-                    //     color2 = this.pack(this.HSLToRGB([d2 + (0.15 * corr), 1, 0.5]));
-                    //     // Create gradient fill between the endpoints.
-                    //     const grad = m.createLinearGradient(x1, y1, x2, y2);
-                    //     grad.addColorStop(0, color1);
-                    //     grad.addColorStop(1, color2);
-                    //     m.fillStyle = grad;
-                    //     // Draw quadratic curve segment as a fill.
-                    //     // inner/outer radius.
-                    //     const r1 = (r + (w / 2)) / r;
-                    //     const r2 = (r - (w / 2)) / r;
-                    //     m.beginPath();
-                    //     m.moveTo(x1 * r1, y1 * r1);
-                    //     m.quadraticCurveTo(xm * r1, ym * r1, x2 * r1, y2 * r1);
-                    //     m.lineTo(x2 * r2, y2 * r2);
-                    //     m.quadraticCurveTo(xm * r2, ym * r2, x1 * r2, y1 * r2);
-                    //     m.fill();
-                    // } else {
                     // Create gradient fill between the endpoints.
                     const grad = m.createLinearGradient(x1, y1, x2, y2);
                     grad.addColorStop(0, color1);
@@ -260,21 +219,21 @@ export default {
                     m.moveTo(x1, y1);
                     m.quadraticCurveTo(xm, ym, x2, y2);
                     m.stroke();
-                    // }
                 }
                 // Prevent seams where curves join.
                 angle1 = angle2 - nudge;
                 color1 = color2;
-                // d1 = d2;
-                // console.log(d1);
+                d1 = d2;
             }
             m.restore();
-            // if (__debug) {
-            //     $('body').append(`<div>drawCircle  ${(+(new Date()) - tm)} ms`);
-            // }
+            if (this.debug) {
+                const debugElement = document.createElement('div');
+                debugElement.textContent = `drawCircle ${(+(new Date()) - tm)} ms`;
+                document.body.appendChild(debugElement);
+            }
         },
         drawMask() {
-            // const tm = +(new Date());
+            const tm = +(new Date());
 
             // Iterate over sat/lum space and calculate appropriate mask pixel values.
             const size = this.square * 2;
@@ -284,13 +243,13 @@ export default {
                 const isy = 1 / sizey;
                 // eslint-disable-next-line
                 for (let y = 0; y <= sizey; ++y) {
-                    const l = 1 - (y * isy);
+                    const l = 1 - y * isy;
                     // eslint-disable-next-line
                     for (let x = 0; x <= sizex; ++x) {
-                        const s = 1 - (x * isx);
+                        const s = 1 - x * isx;
                         // From sat/lum to alpha and color (grayscale)
-                        const a = 1 - (2 * Math.min(l * s, (1 - l) * s));
-                        const c = (a > 0) ? ((((2 * l) - 1) + a) * (0.5 / a)) : 0;
+                        const a = 1 - 2 * Math.min(l * s, (1 - l) * s);
+                        const c = a > 0 ? (2 * l - 1 + a) * (0.5 / a) : 0;
                         outputPixel(x, y, c, a);
                     }
                 }
@@ -315,15 +274,24 @@ export default {
                 });
 
                 ctx.putImageData(frame, 0, 0);
-                this.ctxMask.drawImage(buffer, 0, 0, sz + 1, sz + 1,
-                    -sq, -sq, sq * 2, sq * 2);
-            } else if (!($.browser.msie || false)) {
+                this.ctxMask.drawImage(
+                    buffer,
+                    0,
+                    0,
+                    sz + 1,
+                    sz + 1,
+                    -sq,
+                    -sq,
+                    sq * 2,
+                    sq * 2
+                );
+            } else if (!isIE()) {
                 // Render directly at half-resolution
                 const sz = Math.floor(size / 2);
                 calculateMask(sz, sz, (x, y, _c, a) => {
                     const c = Math.round(_c * 255);
                     this.ctxMask.fillStyle = `rgba(${c}, ${c}, ${c}, ${a})`;
-                    this.ctxMask.fillRect((x * 2) - sq - 1, (y * 2) - sq - 1, 2, 2);
+                    this.ctxMask.fillRect(x * 2 - sq - 1, y * 2 - sq - 1, 2, 2);
                 });
             } else {
                 let cacheLast;
@@ -345,30 +313,32 @@ export default {
                         const aLast = cacheLast[x][1];
                         const color1 = this.packDX(cLast, aLast);
                         const color2 = this.packDX(c, a);
-                        const y1 = Math.round(this.mid + ((((y - 1) * 0.333) - 1) * sq));
-                        const y2 = Math.round(this.mid + (((y * 0.333) - 1) * sq));
-                        $('<div>').css({
-                            position: 'absolute',
-                            filter: `progid:DXImageTransform.Microsoft.Gradient(StartColorStr=${color1}, EndColorStr=${color2}, GradientType=0)`,
-                            top: y1,
-                            height: y2 - y1,
-                            // Avoid right-edge sticking out.
-                            left: this.mid + ((x * w) - sq - 1),
-                            width: w - (x === sizex ? Math.round(w / 2) : 0),
-                        }).appendTo(this.cnvMask);
+                        const y1 = Math.round(this.mid + ((y - 1) * 0.333 - 1) * sq);
+                        const y2 = Math.round(this.mid + (y * 0.333 - 1) * sq);
+                        // Append div to canvasMask
+                        const div = document.createElement('div');
+                        div.style.position = 'absolute'
+                        div.style.filter = `progid:DXImageTransform.Microsoft.Gradient(StartColorStr=${color1}, EndColorStr=${color2}, GradientType=0)`;
+                        div.style.top = y1;
+                        div.style.height = y2 - y1;
+                        div.style.left = this.mid + (x * w - sq - 1);
+                        div.style.width = this.mid + (x * w - sq - 1);
+                        this.cnvMask.appendChild(div)
                     }
                     cache.push([c, a]);
                 });
             }
-            // if (__debug) {
-            //     $('body').append(`<div>drawMask ${(+(new Date()) - tm)} ms`);
-            // }
+            if (this.debug) {
+                const debugElement = document.createElement('div');
+                debugElement.textContent = `drawMask ${(+(new Date()) - tm)} ms`;
+                document.body.appendChild(debugElement);
+            }
         },
         drawMarkers() {
             // Determine marker dimensions
             const sz = this.width;
             const lw = Math.ceil(this.markerSize / 4);
-            const r = (this.markerSize - lw) + 1;
+            const r = this.markerSize - lw + 1;
             const angle = this.hsl[0] * 6.28;
             const x1 = Math.sin(angle) * this.radius;
             const y1 = -Math.cos(angle) * this.radius;
@@ -380,7 +350,7 @@ export default {
                 { x: x1, y: y1, r, c: '#000', lw: lw + 1 },
                 { x: x1, y: y1, r: this.markerSize, c: '#fff', lw },
                 { x: x2, y: y2, r, c: c2, lw: lw + 1 },
-                { x: x2, y: y2, r: this.markerSize, c: c1, lw },
+                { x: x2, y: y2, r: this.markerSize, c: c1, lw }
             ];
 
             // Update the overlay canvas.
@@ -396,9 +366,8 @@ export default {
         },
         updateDisplay(noEmit) {
             // Determine whether labels/markers should invert.
-            this.invert = ((this.rgb[0] * 0.3)
-                + (this.rgb[1] * 0.59)
-                + (this.rgb[2] * 0.11)) <= 0.6;
+            this.invert =
+                this.rgb[0] * 0.3 + this.rgb[1] * 0.59 + this.rgb[2] * 0.11 <= 0.6;
 
             // Draw markers
             this.drawMarkers();
@@ -411,7 +380,7 @@ export default {
         widgetCoords(event) {
             return {
                 x: event.pageX - this.offset.left - this.mid,
-                y: event.pageY - this.offset.top - this.mid,
+                y: event.pageY - this.offset.top - this.mid
             };
         },
         mousedown(event) {
@@ -424,15 +393,15 @@ export default {
             }
 
             // Update the stored offset for the widget.
-            this.offset = ({
+            this.offset = {
                 left: this.$refs['color-wheel'].getBoundingClientRect().left,
-                top: this.$refs['color-wheel'].getBoundingClientRect().top,
-            });
-            // console.log(this.offset);
+                top: this.$refs['color-wheel'].getBoundingClientRect().top
+            };
 
             // Check which area is being dragged
             const pos = this.widgetCoords(event);
-            this.circleDrag = Math.max(Math.abs(pos.x), Math.abs(pos.y)) > (this.square + 2);
+            this.circleDrag =
+                Math.max(Math.abs(pos.x), Math.abs(pos.y)) > this.square + 2;
 
             // Process
             this.mousemove(event);
@@ -459,53 +428,51 @@ export default {
             document.removeEventListener('mouseup', this.mouseup);
             this.dragging = false;
         },
-
-        /* constious color utility functions */
+        /* Constious color utility functions */
         dec2hex(x) {
             return (x < 16 ? '0' : '') + x.toString(16);
         },
-
         packDX(c, a) {
-            return `#${this.dec2hex(a) + this.dec2hex(c) + this.dec2hex(c) + this.dec2hex(c)}`;
+            return `#${this.dec2hex(a) +
+                this.dec2hex(c) +
+                this.dec2hex(c) +
+                this.dec2hex(c)}`;
         },
-
         pack(rgb) {
             const r = Math.round(rgb[0] * 255);
             const g = Math.round(rgb[1] * 255);
             const b = Math.round(rgb[2] * 255);
             return `#${this.dec2hex(r) + this.dec2hex(g) + this.dec2hex(b)}`;
         },
-
         unpack(color) {
             if (color.length === 7) {
-                return [1, 3, 5].map(i => parseInt(color.substring(i, i + 2), 16) / 255);
+                return [1, 3, 5].map(
+                    i => parseInt(color.substring(i, i + 2), 16) / 255
+                );
             } else if (color.length === 4) {
                 return [1, 2, 3].map(i => parseInt(color.substring(i, i + 1), 16) / 15);
             }
             return false;
         },
-
         HSLToRGB(hsl) {
             const h = hsl[0];
             const s = hsl[1];
             const l = hsl[2];
-            const m2 = (l <= 0.5) ? l * (s + 1) : (l + s) - (l * s);
-            const m1 = (l * 2) - m2;
+            const m2 = l <= 0.5 ? l * (s + 1) : l + s - l * s;
+            const m1 = l * 2 - m2;
             return [
                 this.hueToRGB(m1, m2, h + 0.33333),
                 this.hueToRGB(m1, m2, h),
-                this.hueToRGB(m1, m2, h - 0.33333),
+                this.hueToRGB(m1, m2, h - 0.33333)
             ];
         },
-
         hueToRGB(m1, m2, h) {
             h = (h + 1) % 1;
-            if (h * 6 < 1) return m1 + ((m2 - m1) * h * 6);
+            if (h * 6 < 1) return m1 + (m2 - m1) * h * 6;
             if (h * 2 < 1) return m2;
-            if (h * 3 < 2) return m1 + ((m2 - m1) * (0.66666 - h) * 6);
+            if (h * 3 < 2) return m1 + (m2 - m1) * (0.66666 - h) * 6;
             return m1;
         },
-
         RGBToHSL(rgb) {
             const r = rgb[0];
             const g = rgb[1];
@@ -517,27 +484,25 @@ export default {
             let s = 0;
             const l = (min + max) / 2;
             if (l > 0 && l < 1) {
-                s = delta / (l < 0.5 ? (2 * l) : (2 - (2 * l)));
+                s = delta / (l < 0.5 ? 2 * l : 2 - 2 * l);
             }
             if (delta > 0) {
                 if (max === r && max !== g) h += (g - b) / delta;
-                if (max === g && max !== b) h += (2 + ((b - r) / delta));
-                if (max === b && max !== r) h += (4 + ((r - g) / delta));
+                if (max === g && max !== b) h += 2 + (b - r) / delta;
+                if (max === b && max !== r) h += 4 + (r - g) / delta;
                 h /= 6;
             }
             return [h, s, l];
         },
-
         /**
          * Helper for returning coordinates relative to the center with touch event
          */
         widgetCoordsTouch(event) {
             return {
                 x: event.targetTouches[0].pageX - this.offset.left - this.mid,
-                y: event.targetTouches[0].pageY - this.offset.top - this.mid,
+                y: event.targetTouches[0].pageY - this.offset.top - this.mid
             };
         },
-
         /**
          * Handle the touchstart events
          */
@@ -554,16 +519,16 @@ export default {
             this._touchMoved = false;
 
             // Update the stored offset for the widget.
-            this.offset = ({
+            this.offset = {
                 left: this.$refs['color-wheel'].getBoundingClientRect().left,
-                top: this.$refs['color-wheel'].getBoundingClientRect().top,
-            });
+                top: this.$refs['color-wheel'].getBoundingClientRect().top
+            };
 
             // Check which area is being dragged
             const pos = this.widgetCoordsTouch(event);
-            this.circleDrag = Math.max(Math.abs(pos.x), Math.abs(pos.y)) > (this.square + 2);
+            this.circleDrag =
+                Math.max(Math.abs(pos.x), Math.abs(pos.y)) > this.square + 2;
         },
-
         /**
          * Handle the touchstart events
          */
@@ -600,10 +565,8 @@ export default {
             }
             // Unset the flag to allow other widgets to inherit the touch event
             this.touchHandled = false;
-        },
-    },
-    name: 'color-picker',
-    // Farbtastic 2.0.0-alpha.1
+        }
+    }
 };
 </script>
 <style scoped>
