@@ -73,7 +73,7 @@ export default {
     },
     data() {
         return {
-            debug: true,
+            debug: false,
             dragging: false,
             circleDrag: false,
             value: '',
