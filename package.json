@@ -1,5 +1,5 @@
 {
-  "name": "@stijlbreuk/vue-color-picker",
+  "name": "vue-color-picker-wheel",
   "version": "0.1.2",
   "description": "A Vue color picker component based on the Farbtastic jQuery Color Picker plug-in",
   "main": "dist/color-picker.umd.js",
