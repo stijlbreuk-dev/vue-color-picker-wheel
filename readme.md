@@ -1,11 +1,11 @@
 # Vue Color Picker
 
-A Vue color picker component based on the Farbtastic jQuery Color Picker plug-in.
+A Vue color picker component based on the [Farbtastic jQuery Color Picker plug-in](http://acko.net/blog/farbtastic-jquery-color-picker-plug-in/).
 
 # Installation
 
 ```
-npm install --save sb-color-picker
+npm install --save @stijlbreuk/vue-color-picker-wheel
 ```
 
 # Usage
@@ -19,7 +19,7 @@ ES6 modules
 </template>
 
 <script>
-import ColorPicker from 'sb-color-picker';
+import ColorPicker from '@stijlbreuk/vue-color-picker-wheel';
 
 export default {
   name: 'app',
@@ -46,7 +46,7 @@ In a script tag, this loads the component using the global Vue instance.
 <script src="https://unpkg.com/sb-color-picker"></script>
 ```
 
-# Props
+# Properties
 | Property   | Description                                             | Type                    | Default | Example              |
 | ---------- | ------------------------------------------------------- | ----------------------- | ------- | -------------------- |
 | width      | The width of the color picker                           | Number                  | 300     | :width="400"         |
@@ -68,3 +68,6 @@ vue serve --open src/color-picker.vue
 # Build all variants
 npm run bundle
 ```
+
+# License
+[MIT](https://github.com/stijlbreuk/vue-color-picker-wheel/blob/master/readme.md)
