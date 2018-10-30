@@ -2,6 +2,10 @@
 
 A Vue color picker component based on the [Farbtastic jQuery Color Picker plug-in](http://acko.net/blog/farbtastic-jquery-color-picker-plug-in/).
 
+![npm](https://img.shields.io/npm/v/vue-color-picker-wheel.svg)
+![npm](https://img.shields.io/npm/dt/vue-color-picker-wheel.svg)
+![GitHub](https://img.shields.io/github/license/stijlbreuk/vue-color-picker-wheel.svg)
+
 # Installation
 
 ```
