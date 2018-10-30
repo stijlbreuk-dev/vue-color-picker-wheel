@@ -209,40 +209,16 @@ export default {
                 // New color
                 color2 = this.pack(this.HSLToRGB([d2, 1, 0.5]));
                 if (i > 0) {
-                    if (isIE()) {
-                        // IE's gradient calculations mess up the colors.
-                        // Correct along the diagonals.
-                        const corr = (1 + Math.min(Math.abs(Math.tan(angle1)),
-                            Math.abs(Math.tan((Math.PI / 2) - angle1)))) / n;
-                        color1 = this.pack(this.HSLToRGB([d1 - (0.15 * corr), 1, 0.5]));
-                        color2 = this.pack(this.HSLToRGB([d2 + (0.15 * corr), 1, 0.5]));
-                        // Create gradient fill between the endpoints.
-                        const grad = m.createLinearGradient(x1, y1, x2, y2);
-                        grad.addColorStop(0, color1);
-                        grad.addColorStop(1, color2);
-                        m.fillStyle = grad;
-                        // Draw quadratic curve segment as a fill.
-                        // inner/outer radius.
-                        const r1 = (r + (w / 2)) / r;
-                        const r2 = (r - (w / 2)) / r;
-                        m.beginPath();
-                        m.moveTo(x1 * r1, y1 * r1);
-                        m.quadraticCurveTo(xm * r1, ym * r1, x2 * r1, y2 * r1);
-                        m.lineTo(x2 * r2, y2 * r2);
-                        m.quadraticCurveTo(xm * r2, ym * r2, x1 * r2, y1 * r2);
-                        m.fill();
-                    } else {
-                        // Create gradient fill between the endpoints.
-                        const grad = m.createLinearGradient(x1, y1, x2, y2);
-                        grad.addColorStop(0, color1);
-                        grad.addColorStop(1, color2);
-                        m.strokeStyle = grad;
-                        // Draw quadratic curve segment.
-                        m.beginPath();
-                        m.moveTo(x1, y1);
-                        m.quadraticCurveTo(xm, ym, x2, y2);
-                        m.stroke();
-                    }
+                    // Create gradient fill between the endpoints.
+                    const grad = m.createLinearGradient(x1, y1, x2, y2);
+                    grad.addColorStop(0, color1);
+                    grad.addColorStop(1, color2);
+                    m.strokeStyle = grad;
+                    // Draw quadratic curve segment.
+                    m.beginPath();
+                    m.moveTo(x1, y1);
+                    m.quadraticCurveTo(xm, ym, x2, y2);
+                    m.stroke();
                 }
                 // Prevent seams where curves join.
                 angle1 = angle2 - nudge;
