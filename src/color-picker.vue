@@ -42,6 +42,7 @@ import isIE from './util/is-ie.js';
 const DEFAULT_WIDTH_HEIGHT = 300;
 
 export default {
+    name: 'color-picker',
     props: {
         width: {
             required: false,
@@ -451,26 +452,22 @@ export default {
             document.removeEventListener('mouseup', this.mouseup);
             this.dragging = false;
         },
-
-        /* constious color utility functions */
+        /* Constious color utility functions */
         dec2hex(x) {
             return (x < 16 ? '0' : '') + x.toString(16);
         },
-
         packDX(c, a) {
             return `#${this.dec2hex(a) +
                 this.dec2hex(c) +
                 this.dec2hex(c) +
                 this.dec2hex(c)}`;
         },
-
         pack(rgb) {
             const r = Math.round(rgb[0] * 255);
             const g = Math.round(rgb[1] * 255);
             const b = Math.round(rgb[2] * 255);
             return `#${this.dec2hex(r) + this.dec2hex(g) + this.dec2hex(b)}`;
         },
-
         unpack(color) {
             if (color.length === 7) {
                 return [1, 3, 5].map(
@@ -481,7 +478,6 @@ export default {
             }
             return false;
         },
-
         HSLToRGB(hsl) {
             const h = hsl[0];
             const s = hsl[1];
@@ -494,7 +490,6 @@ export default {
                 this.hueToRGB(m1, m2, h - 0.33333)
             ];
         },
-
         hueToRGB(m1, m2, h) {
             h = (h + 1) % 1;
             if (h * 6 < 1) return m1 + (m2 - m1) * h * 6;
@@ -502,7 +497,6 @@ export default {
             if (h * 3 < 2) return m1 + (m2 - m1) * (0.66666 - h) * 6;
             return m1;
         },
-
         RGBToHSL(rgb) {
             const r = rgb[0];
             const g = rgb[1];
@@ -524,7 +518,6 @@ export default {
             }
             return [h, s, l];
         },
-
         /**
          * Helper for returning coordinates relative to the center with touch event
          */
@@ -534,7 +527,6 @@ export default {
                 y: event.targetTouches[0].pageY - this.offset.top - this.mid
             };
         },
-
         /**
          * Handle the touchstart events
          */
@@ -561,7 +553,6 @@ export default {
             this.circleDrag =
                 Math.max(Math.abs(pos.x), Math.abs(pos.y)) > this.square + 2;
         },
-
         /**
          * Handle the touchstart events
          */
@@ -599,8 +590,7 @@ export default {
             // Unset the flag to allow other widgets to inherit the touch event
             this.touchHandled = false;
         }
-    },
-    name: 'color-picker'
+    }
 };
 </script>
 <style scoped>
