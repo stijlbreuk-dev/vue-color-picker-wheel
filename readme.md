@@ -1,19 +1,19 @@
 # Vue Color Picker Wheel
 
 <p align="center">
-  <!-- IMG -->
+  <img src="https://cdn.stijlbreuk.nu/vue-color-picker-wheel/assets/pictures/vue-color-picker-wheel-example.png" alt="Example"/>
 </p>
 
 <p align="center">
 
 <a href="https://www.npmjs.com/package/vue-color-picker-wheel">
-    <img src="https://img.shields.io/npm/v/vue-color-picker-wheel.svg" alt="Version">
+    <img src="https://img.shields.io/npm/v/vue-color-picker-wheel.svg" alt="Version"/>
 </a>
 <a href="https://www.npmjs.com/package/vue-color-picker-wheel">
-    <img src="https://img.shields.io/npm/dt/vue-color-picker-wheel.svg" alt="Total downloads">
+    <img src="https://img.shields.io/npm/dt/vue-color-picker-wheel.svg" alt="Downloads"/>
 </a>
 <a href="https://www.npmjs.com/package/vue-color-picker-wheel">
-    <img src="https://img.shields.io/npm/l/vue-color-picker-wheel.svg" alt="License">
+    <img src="https://img.shields.io/npm/l/vue-color-picker-wheel.svg" alt="License"/>
 </a>
 
 </p>
@@ -23,7 +23,10 @@ A Vue color picker component based on the <a href="http://acko.net/blog/farbtast
 </p>
 
 # Demo
-- [Simple CodePen demo](https://codepen.io/nino-vrijman/pen/ePaELe)
+## Basic
+[Basic CodePen demo](https://codepen.io/nino-vrijman/pen/ePaELe)
+
+[![Edit Vue Color Picker Wheel basic example](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/ox1zqx6vxz?module=%2Fsrc%2FApp.vue)
 
 # Installation
 
