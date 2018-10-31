@@ -1,7 +1,7 @@
 # Vue Color Picker Wheel
 
 <p align="center">
-  <img src="https://cdn.stijlbreuk.nu/vue-color-picker-wheel/assets/pictures/vue-color-picker-wheel-example.png" alt="Example"/>
+  <img src="https://raw.githubusercontent.com/stijlbreuk/vue-color-picker-wheel/master/examples/vue-color-picker-wheel-example.png" alt="Example"/>
 </p>
 
 <p align="center">
@@ -40,7 +40,7 @@ ES6 modules
 ```HTML
 <template>
   <div>
-    <ColorPicker :width="300" :height="300" :disabled="false" @colorChange="onColorChange"></ColorPicker>
+    <ColorPicker :width="300" :height="300" :disabled="false" startColor="#ff0000" @colorChange="onColorChange"></ColorPicker>
   </div>
 </template>
 
