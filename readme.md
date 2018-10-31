@@ -26,7 +26,7 @@ A Vue color picker component based on the <a href="http://acko.net/blog/farbtast
 ## Basic
 [Basic CodePen demo](https://codepen.io/nino-vrijman/pen/ePaELe)
 
-[![Edit Vue Color Picker Wheel basic example](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/ox1zqx6vxz?module=%2Fsrc%2FApp.vue)
+[![Edit Vue Color Picker Wheel basic example](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/7j4po25ly1)
 
 # Installation
 
