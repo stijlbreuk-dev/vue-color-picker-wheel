@@ -1,39 +1,29 @@
 <template>
-    <div ref="container">
-        <!-- <input id="color-input" type="text" v-model="color"></input> -->
-        <div :class="{s_disabled: disabled}"
-             ref="color-wheel"
-             id="color-wheel"
-             style="position: relative">
-            <div class="farbtastic"
-                 style="position: relative"
-                 :style="{width, height}"
-                 :width="width"
-                 :height="height">
-                <div ref="farbtastic-solid"
-                     class="farbtastic-solid"
-                     :style="solidStyle"
-                     :width="width"
-                     :height="height"
-                     style="position: absolute"></div>
-                <canvas ref="farbtastic-mask"
-                        class="farbtastic-mask"
-                        :style="{width, height}"
-                        :width="width"
-                        :height="height"
-                        style="position: absolute"></canvas>
-                <canvas @mousedown="mousedown"
-                        @touchstart="touchHandleStart"
-                        @touchmove="touchHandleMove"
-                        @touchend="touchHandleEnd"
-                        ref="farbtastic-overlay"
-                        class="farbtastic-overlay"
-                        :style="{width, height}"
-                        :width="width"
-                        :height="height"
-                        style="position: absolute"></canvas>
-            </div>
-        </div>
+    <!-- <input id="color-input" type="text" v-model="color"></input> -->
+    <div :class="{s_disabled: disabled}"
+         ref="color-wheel"
+         id="color-wheel"
+         :style="{width: `${width}px`, height: `${height}px`, position: 'relative'}">
+            <div ref="farbtastic-solid"
+                 class="farbtastic-solid"
+                 :style="solidStyle"
+                 style="position: absolute"></div>
+            <canvas ref="farbtastic-mask"
+                    class="farbtastic-mask"
+                    :style="{width, height}"
+                    :width="width"
+                    :height="height"
+                    style="position: absolute"></canvas>
+            <canvas @mousedown="mousedown"
+                    @touchstart="touchHandleStart"
+                    @touchmove="touchHandleMove"
+                    @touchend="touchHandleEnd"
+                    ref="farbtastic-overlay"
+                    class="farbtastic-overlay"
+                    :style="{width, height}"
+                    :width="width"
+                    :height="height"
+                    style="position: absolute"></canvas>
     </div>
 </template>
 <script>
