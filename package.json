@@ -20,7 +20,7 @@
     "type": "git",
     "url": "https://github.com/stijlbreuk/vue-color-picker-wheel.git"
   },
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {},
   "devDependencies": {
     "rollup": "^0.66.6",
@@ -38,11 +38,5 @@
     "picker",
     "component",
     "farbtastic"
-  ],
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/stijlbreuk/vue-color-picker-wheel/blob/master/LICENSE"
-    }
   ]
 }
