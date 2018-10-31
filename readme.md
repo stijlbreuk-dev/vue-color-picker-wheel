@@ -1,10 +1,29 @@
-# Vue Color Picker
+# Vue Color Picker Wheel
 
-A Vue color picker component based on the [Farbtastic jQuery Color Picker plug-in](http://acko.net/blog/farbtastic-jquery-color-picker-plug-in/).
+<p align="center">
+  <!-- IMG -->
+</p>
 
-![npm](https://img.shields.io/npm/v/vue-color-picker-wheel.svg)
-![npm](https://img.shields.io/npm/dt/vue-color-picker-wheel.svg)
-![GitHub](https://img.shields.io/github/license/stijlbreuk/vue-color-picker-wheel.svg)
+<p align="center">
+
+<a href="https://www.npmjs.com/package/vue-color-picker-wheel">
+    <img src="https://img.shields.io/npm/v/vue-color-picker-wheel.svg" alt="Version">
+</a>
+<a href="https://www.npmjs.com/package/vue-color-picker-wheel">
+    <img src="https://img.shields.io/npm/dt/vue-color-picker-wheel.svg" alt="Total downloads">
+</a>
+<a href="https://www.npmjs.com/package/vue-color-picker-wheel">
+    <img src="https://img.shields.io/npm/l/vue-color-picker-wheel.svg" alt="License">
+</a>
+
+</p>
+
+<p align="center">
+A Vue color picker component based on the <a href="http://acko.net/blog/farbtastic-jquery-color-picker-plug-in/">Farbtastic jQuery Color Picker plug-in</a>.
+</p>
+
+# Demo
+- [Simple CodePen demo](https://codepen.io/nino-vrijman/pen/ePaELe)
 
 # Installation
 
@@ -41,13 +60,13 @@ export default {
 
 CommonJS
 ```JavaScript
-const ColorPicker = require('sb-color-picker');
+const ColorPicker = require('vue-color-picker-wheel');
 ```
 
 In a script tag, this loads the component using the global Vue instance.
 
 ```HTML
-<script src="https://unpkg.com/sb-color-picker"></script>
+<script src="https://unpkg.com/vue-color-picker-wheel"></script>
 ```
 
 # Properties
@@ -64,6 +83,8 @@ In a script tag, this loads the component using the global Vue instance.
 | colorChange | Is fired after the selected color has changed | color: String (hex color code) |
 
 # Contributing
+
+Checkout [GitHub issues](https://github.com/stijlbreuk/vue-color-picker-wheel/issues) for any issues we need some help with.
 
 ```bash
 # Serve with hot reload (default at localhost:8080)
