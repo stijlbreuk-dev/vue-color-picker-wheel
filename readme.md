@@ -94,7 +94,7 @@ Checkout [GitHub issues](https://github.com/stijlbreuk/vue-color-picker-wheel/is
 vue serve --open src/color-picker.vue
 
 # Build all variants
-npm run bundle
+npm run build
 ```
 
 # License
