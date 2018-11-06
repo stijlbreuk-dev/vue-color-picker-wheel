@@ -98,4 +98,4 @@ npm run build
 ```
 
 # License
-[MIT](https://github.com/stijlbreuk/vue-color-picker-wheel/blob/master/readme.md)
+[MIT](https://github.com/stijlbreuk/vue-color-picker-wheel/blob/master/LICENSE)
