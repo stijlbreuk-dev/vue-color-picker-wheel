@@ -11,9 +11,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run build:umd & npm run build:es & npm run build:unpkg",
-    "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/color-picker.umd.js",
-    "build:es": "rollup --config build/rollup.config.js --format es --file dist/color-picker.esm.js",
-    "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/color-picker.min.js --environment SB_MINIFY"
+    "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/color-picker.umd.js --environment BUILD:production",
+    "build:es": "rollup --config build/rollup.config.js --format es --file dist/color-picker.esm.js --environment BUILD:production",
+    "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/color-picker.min.js --environment BUILD:production,SB_MINIFY"
   },
   "author": "Jeroen Peerbolte <jeroen@stijlbreuk.nl>",
   "repository": {
