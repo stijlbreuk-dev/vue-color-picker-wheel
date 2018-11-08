@@ -1,7 +1,7 @@
 # Vue Color Picker Wheel
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/stijlbreuk/vue-color-picker-wheel/master/examples/vue-color-picker-wheel-example.png" alt="Example"/>
+  <img src="https://raw.githubusercontent.com/stijlbreuk/vue-color-picker-wheel/master/examples/assets/vue-color-picker-wheel-example.png" alt="Example"/>
 </p>
 
 <p align="center">
@@ -39,25 +39,30 @@ npm install --save vue-color-picker-wheel
 ES6 modules
 ```HTML
 <template>
-  <div>
-    <ColorPicker :width="300" :height="300" :disabled="false" startColor="#ff0000" @colorChange="onColorChange"></ColorPicker>
-  </div>
+    <div id="app">
+        <color-picker v-model="color"></color-picker>
+        <p>
+            Color:
+            <input v-model="color" type="text">
+        </p>
+    </div>
 </template>
-
 <script>
-import ColorPicker from 'vue-color-picker-wheel';
+    import ColorPicker from '../src/color-picker.vue';
 
-export default {
-  name: 'app',
-  components: {
-    ColorPicker
-  },
-  methods: {
-    onColorChange(color) {
-      console.log('Color has changed to: ', color);
-    }
-  }
-};
+    export default {
+        name: 'App',
+        components: {
+            ColorPicker
+        },
+        created() {
+        },
+        data() {
+            return {
+                color: '#ffffff'
+            };
+        },
+    };
 </script>
 ```
 
@@ -78,6 +83,7 @@ In a script tag, this loads the component using the global Vue instance.
 | width      | The width of the color picker                           | Number                  | 300     | :width="400"         |
 | height     | The height of the color picker                          | Number                  | 300     | :height="400"        |
 | disabled   | Whether or not the color picker should be disabled      | Boolean                 | false   | :disabled="false"    |
+| v-model    | v-model to create two-way data binding for color        | String (hex color code) | none    | v-model="color"      |
 | startColor | The color that is selected when opening the colorpicker | String (hex color code) | none    | startColor="#ffffff" |
 
 # Events
