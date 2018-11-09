@@ -10,6 +10,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublishOnly": "npm run build",
     "build": "npm run build:umd & npm run build:es & npm run build:unpkg",
     "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/color-picker.umd.js --environment BUILD:production",
     "build:es": "rollup --config build/rollup.config.js --format es --file dist/color-picker.esm.js --environment BUILD:production",
