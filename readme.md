@@ -87,9 +87,9 @@ In a script tag, this loads the component using the global Vue instance.
 | startColor | The color that is selected when opening the colorpicker | String (hex color code) | none    | startColor="#ffffff" |
 
 # Events
-| Event       | Description                                   | Event parameters               |
-| ----------- | --------------------------------------------- | ------------------------------ |
-| colorChange | Is fired after the selected color has changed | color: String (hex color code) |
+| Event        | Description                                   | Event parameters               |
+| ------------ | --------------------------------------------- | ------------------------------ |
+| color-change | Is fired after the selected color has changed | color: String (hex color code) |
 
 # Contributing
 

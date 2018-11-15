@@ -1,37 +1,28 @@
 <template>
-    <!-- <input id="color-input" type="text" v-model="color"></input> -->
-    <div
-        :class="{s_disabled: disabled}"
-        ref="color-wheel"
-        id="color-wheel"
-        :style="{width: `${width}px`, height: `${height}px`, position: 'relative'}"
-    >
-        <div
-            ref="farbtastic-solid"
-            class="farbtastic-solid"
-            :style="solidStyle"
-            style="position: absolute"
-        ></div>
-        <canvas
-            ref="farbtastic-mask"
-            class="farbtastic-mask"
-            :style="{width, height}"
-            :width="width"
-            :height="height"
-            style="position: absolute"
-        ></canvas>
-        <canvas
-            @mousedown="mousedown"
-            @touchstart="touchHandleStart"
-            @touchmove="touchHandleMove"
-            @touchend="touchHandleEnd"
-            ref="farbtastic-overlay"
-            class="farbtastic-overlay"
-            :style="{width, height}"
-            :width="width"
-            :height="height"
-            style="position: absolute"
-        ></canvas>
+    <div :class="{s_disabled: disabled}"
+         ref="color-wheel"
+         id="color-wheel"
+         :style="{width: `${width}px`, height: `${height}px`, position: 'relative'}">
+        <div ref="farbtastic-solid"
+             class="farbtastic-solid"
+             :style="solidStyle"
+             style="position: absolute"></div>
+        <canvas ref="farbtastic-mask"
+                class="farbtastic-mask"
+                :style="{width, height}"
+                :width="width"
+                :height="height"
+                style="position: absolute"></canvas>
+        <canvas @mousedown="mousedown"
+                @touchstart="touchHandleStart"
+                @touchmove="touchHandleMove"
+                @touchend="touchHandleEnd"
+                ref="farbtastic-overlay"
+                class="farbtastic-overlay"
+                :style="{width, height}"
+                :width="width"
+                :height="height"
+                style="position: absolute"></canvas>
     </div>
 </template>
 <script>
@@ -68,6 +59,12 @@
             }
         },
         mounted() {
+            /**
+             * @deprecated since: 0.4.0, remove in: 1.0.0, https://github.com/stijlbreuk/vue-color-picker-wheel/issues/6
+             */
+            if (this.hasCamelCaseColorChangeListener) {
+                console.warn(`Using the colorChange event is deprecated since version 0.4.0. It will be deleted in version 1.0.0. 'v-model' or the kebab-case variant 'color-change' should be used.`);
+            }
             this.initWidget();
             this.setColor(this.value || this.startColor || DEFAULT_START_COLOR);
         },
@@ -101,6 +98,12 @@
             }
         },
         computed: {
+            /**
+             * @deprecated since: 0.4.0, remove in: 1.0.0, https://github.com/stijlbreuk/vue-color-picker-wheel/issues/6
+             */
+            hasCamelCaseColorChangeListener() {
+                return this.$listeners && this.$listeners.colorChange;
+            },
             solidStyle() {
                 return {
                     'background-color': this.pack(this.HSLToRGB([this.hsl[0], 1, 0.5])),
@@ -175,7 +178,7 @@
                     ctx.scale(ratio, ratio);
                 }
             },
-            drawCircle() {                ``
+            drawCircle() {
                 const tm = +(new Date());
                 // Draw a hue circle with a bunch of gradient-stroked beziers.
                 // Have to use beziers, as gradient-stroked arcs don't work.
@@ -375,8 +378,12 @@
 
                 if (!noEmit) {
                     // Emit color
-                    this.$emit('colorChange', this.color);
                     this.$emit('input', this.color);
+                    /**
+                     * @deprecated since: 0.4.0, remove in: 1.0.0, https://github.com/stijlbreuk/vue-color-picker-wheel/issues/6
+                     */
+                    this.$emit('colorChange', this.color);
+                    this.$emit('color-change', this.color);
                 }
             },
             widgetCoords(event) {
