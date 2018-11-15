@@ -103,5 +103,8 @@ vue serve --open src/color-picker.vue
 npm run build
 ```
 
+# Changelog
+[Changelog on Github](https://github.com/stijlbreuk/vue-color-picker-wheel/blob/master/CHANGELOG.md)
+
 # License
 [MIT](https://github.com/stijlbreuk/vue-color-picker-wheel/blob/master/LICENSE)
