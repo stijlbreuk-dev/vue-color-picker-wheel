@@ -1,5 +1,5 @@
 <template>
-    <div :class="{s_disabled: disabled}"
+    <div :class="{s_disabled: disabled}" class="cpw_container"
          ref="color-wheel"
          id="color-wheel"
          :style="{width: `${width}px`, height: `${height}px`, position: 'relative'}">
@@ -11,8 +11,7 @@
                 class="farbtastic-mask"
                 :style="{width, height}"
                 :width="width"
-                :height="height"
-                style="position: absolute"></canvas>
+                :height="height"></canvas>
         <canvas @mousedown="mousedown"
                 @touchstart="touchHandleStart"
                 @touchmove="touchHandleMove"
@@ -21,8 +20,7 @@
                 class="farbtastic-overlay"
                 :style="{width, height}"
                 :width="width"
-                :height="height"
-                style="position: absolute"></canvas>
+                :height="height"></canvas>
     </div>
 </template>
 <script>
@@ -578,8 +576,21 @@
         }
     };
 </script>
-<style scoped>
+<style lang="scss" scoped>
 .s_disabled {
   opacity: 0.5;
+}
+
+.cpw_container {
+}
+
+.farbtastic-mask {
+    position: absolute;
+    left: 0;
+}
+
+.farbtastic-overlay {
+    position: absolute;
+    left: 0;
 }
 </style>
