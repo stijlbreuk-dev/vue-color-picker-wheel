@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Misalign issues when using CSS rules like 'text-align: center' or 'margin: 0 auto' on the parent element of the color picker
 
 ### Deprecations
-- Using the 'colorChange' event is deprecated, will be removed in 1.0.0. Use 'v-model' or the 'color-change' instead.
+- Using the 'colorChange' event is deprecated, will be removed in 1.0.0. Use 'v-model' or the 'color-change' event instead.
 
 ## [0.3.0] - 15-11-2018
 ### Added
