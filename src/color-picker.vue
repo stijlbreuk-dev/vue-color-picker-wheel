@@ -1,5 +1,6 @@
 <template>
-    <div :class="{s_disabled: disabled}" class="cpw_container"
+    <div :class="{s_disabled: disabled}"
+         class="cpw_container"
          ref="color-wheel"
          id="color-wheel"
          :style="{width: `${width}px`, height: `${height}px`, position: 'relative'}">
@@ -582,15 +583,20 @@
 }
 
 .cpw_container {
-}
+    -webkit-touch-callout: none; /* prevent callout to copy image, etc when tap to hold */
+    text-size-adjust:none; /* prevent webkit from resizing text to fit */
+    tap-highlight-color:rgba(0,0,0,0); /* prevent tap highlight color*/
+    tap-highlight-color: transparent; /* prevent tap highlight color*/
+    user-select:none; 
 
-.farbtastic-mask {
-    position: absolute;
-    left: 0;
-}
+    .farbtastic-mask {
+        position: absolute;
+        left: 0;
+    }
 
-.farbtastic-overlay {
-    position: absolute;
-    left: 0;
+    .farbtastic-overlay {
+        position: absolute;
+        left: 0;
+    }   
 }
 </style>
