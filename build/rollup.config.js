@@ -16,7 +16,6 @@ export default {
             style: {
                 postcssPlugins: [Autoprefixer()]
             }
-            // Use style: 'scss' ? https://rollup-plugin-vue.vuejs.org/options.html#defaultlang
         }),
         buble(), // Transpile to ES5
         process.env.SB_MINIFY ? uglify() : undefined,
