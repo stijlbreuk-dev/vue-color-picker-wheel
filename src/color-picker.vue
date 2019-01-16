@@ -387,8 +387,8 @@
             },
             widgetCoords(event) {
                 return {
-                    x: event.pageX - this.offset.left - this.mid,
-                    y: event.pageY - this.offset.top - this.mid
+                    x: event.clientX - this.offset.left - this.mid,
+                    y: event.clientY - this.offset.top - this.mid
                 };
             },
             mousedown(event) {
@@ -507,8 +507,8 @@
              */
             widgetCoordsTouch(event) {
                 return {
-                    x: event.targetTouches[0].pageX - this.offset.left - this.mid,
-                    y: event.targetTouches[0].pageY - this.offset.top - this.mid
+                    x: event.targetTouches[0].clientX - this.offset.left - this.mid,
+                    y: event.targetTouches[0].clientY - this.offset.top - this.mid
                 };
             },
             /**
