@@ -48,7 +48,7 @@ ES6 modules
     </div>
 </template>
 <script>
-    import ColorPicker from '../src/color-picker.vue';
+    import ColorPicker from 'vue-color-picker-wheel';
 
     export default {
         name: 'App',
